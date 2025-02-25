@@ -21,6 +21,14 @@ namespace Павловская_Lab_6
             public double[] Scores => _scores;
             public double TotalScore => _scores.Sum(); // Общий результат участника
 
+            public Participant(string surname, string name)
+            {
+                _surname = surname;
+                _name = name;
+                _scores = new double[0];
+                
+
+            }
             public void PlayMatch(double result)
             {
                 Array.Resize(ref _scores, _scores.Length + 1);
