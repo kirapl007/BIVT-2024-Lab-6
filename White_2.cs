@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Павловская_Lab_6
+namespace Lab_6
 {
     public class White_2
     {
@@ -25,14 +25,16 @@ namespace Павловская_Lab_6
             public double BestJump => Math.Max(_firstJump, _secondJump); // Лучший прыжок
 
             // конструкторы
-            public Participant(string surname, string name)
+            public Participant(string name, string surname)
             {
-                _surname = surname;
                 _name = name;
+                _surname = surname;
                 _firstJump = 0;
                 _secondJump = 0;
 
             }
+
+            //методы
             public void Jump(double result)
             {
                 if (_firstJump == 0)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Павловская_Lab_6
+namespace Lab_6
 {
     public class White_1
     {

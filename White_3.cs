@@ -5,22 +5,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Павловская_Lab_6
+namespace Lab_6
 {
     public class White_3
     {
         public struct Student
         {
+            //поля
             private string _name;
             private string _surname;
             private int[] _marks;
             private int _skipped;
 
+            //свойства
             public string Name => _name;
             public string Surname => _surname;
             public int Skipped => _skipped;
-            public double AvgMark => Sum(_marks) / _marks.Length; // Средняя оценка
+            public double AvgMark 
+            {
+                get
+                {
+                    if (_marks == null || _marks.Length == 0)
+                    {
+                        return 0;
+                    }
+                    return (double)Sum(_marks) / _marks.Length; // Средняя оценка
+                }
+            }
 
+            //конструкторы
             public Student(string name, string surname)
             {
                 _name = name;
@@ -29,6 +42,7 @@ namespace Павловская_Lab_6
                 _skipped = 0;
             }
 
+            //методы
             public void Lesson(int mark)
             {
                 if (mark == 0)
@@ -37,8 +51,16 @@ namespace Павловская_Lab_6
                 }
                 else
                 {
-                    Array.Resize(ref _marks, _marks.Length + 1);
-                    _marks[-1] = mark; // Добавляем новую оценку
+                    if (_marks == null || _marks.Length == 0) return;
+                    int[] newMarks = new int[_marks.Length + 1];
+                    for (int i = 0; i < _marks.Length; i++)
+                    {
+                        newMarks[i] = _marks[i];
+                    }
+
+                    // Добавляем новый результат в конец массива
+                    newMarks[newMarks.Length - 1] = mark;
+                    _marks = newMarks;
                 }
             }
 
@@ -67,10 +89,11 @@ namespace Павловская_Lab_6
             {
                 Console.WriteLine($"Имя: {_name}, Фамилия: {_surname}, Средняя оценка: {AvgMark:F2}, Пропуски: {_skipped}");
             }
-            public int Sum(int[] array)
+            private int Sum(int[] array)
             {
                 int s = 0;
                 if (array.Length == 0) return 0;
+                if (array==null) return 0;
                 for (int i = 0; i < array.Length; i++)
                 {
                     s += array[i];

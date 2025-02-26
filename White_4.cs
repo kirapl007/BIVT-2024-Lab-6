@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Павловская_Lab_6
+namespace Lab_6
 {
     public class White_4
     {
@@ -15,25 +15,52 @@ namespace Павловская_Lab_6
             private string _surname;
             private double[] _scores;
 
-            //конструкторы
+            //свойства
             public string Name => _name;
             public string Surname => _surname;
             public double[] Scores => _scores;
-            public double TotalScore => _scores.Sum(); // Общий результат участника
+            public double TotalScore
+            {
+                get
+                {
+                    if (_scores == null || _scores.Length == 0)
+                    {
+                        return 0;
+                    }
+                    return Sum(_scores);
+                }
+            }
 
+            //конструкторы
             public Participant(string surname, string name)
             {
                 _surname = surname;
                 _name = name;
                 _scores = new double[0];
-                
+
 
             }
+
+            //методы
+            public void Print()
+            {
+                Console.WriteLine($"Имя: {_name}, Фамилия: {_surname}, Очки: {TotalScore:F1}");
+            }
+            
             public void PlayMatch(double result)
             {
-                Array.Resize(ref _scores, _scores.Length + 1);
-                _scores[-1] = result; // Добавляем новый результат в  конец массива
+                if (_scores == null || _scores.Length == 0) return;
+                double[] newScores = new double[_scores.Length + 1];
+                for (int i = 0; i < _scores.Length; i++)
+                {
+                    newScores[i] = _scores[i];
+                }
+
+                // Добавляем новый результат в конец массива
+                newScores[newScores.Length - 1] = result;
+                _scores = newScores;
             }
+
 
             public static void Sort(Participant[] array)
             {
@@ -56,7 +83,20 @@ namespace Павловская_Lab_6
                 }
             }
 
+            private  double Sum(double[] array)
+            {
+                double s = 0;
+                if (array.Length == 0) return 0;
+                if (array == null) return 0;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    s += array[i];
+                }
+                return s;
+            }
+
 
         }
+        
     }
 }

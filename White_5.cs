@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Павловская_Lab_6
+namespace Lab_6
 {
     public class White_5
     {
@@ -14,7 +14,7 @@ namespace Павловская_Lab_6
             private int _goals;
             private int _misses;
 
-            //конструкторы
+            //свойства
             public int Goals => _goals;
             public int Misses => _misses;
             public int Difference => _goals - _misses;
@@ -28,6 +28,7 @@ namespace Павловская_Lab_6
                 }
             }
 
+            //конструкторы
             public Match(int goals, int misses)
             {
                 _goals = goals;
@@ -38,11 +39,46 @@ namespace Павловская_Lab_6
             {
                 Console.WriteLine($"Забито: {_goals}, Пропущено: {_misses}, Очки: {Score}");
             }
-
-           
-
-           //методы
             
+            
+            
+        }
+
+        //структура2
+        public struct Team
+        {
+            //поля2
+            private string _name;
+            private Match[] _matches;
+
+            //свойства2
+            public string Name => _name;
+            public Match[] Matches => _matches;
+            public int TotalScore => _matches.Sum(m => m.Score); // Суммарные очки
+            public int TotalDifference => _matches.Sum(m => m.Difference); // Общая разница голов
+
+            //конструкторы2
+            public Team(string name)
+            {
+                _name = name;
+                _matches = new Match[0];
+            }
+
+            public void PlayMatch(int goals, int misses)
+            {
+                if ( _matches==null) return;
+                if (_matches.Length == 0) return;
+                Match newMatch = new Match(goals, misses);
+                Match[] newMatches = new Match[_matches.Length + 1];
+                for (int i = 0; i < _matches.Length; i++)
+                {
+                    newMatches[i] = _matches[i];
+                }
+                // Добавляем новый матч в конец массива
+                newMatches[newMatches.Length - 1] = newMatch;
+                _matches = newMatches;
+            }
+
             public static void SortTeams(Team[] teams)
             {
                 int n = teams.Length;
@@ -60,34 +96,8 @@ namespace Павловская_Lab_6
                         }
                     }
                     if (!sw) break;
-                    if (!sw) break;
                 }
             }
-        }
-
-        //структура2
-        public struct Team
-        {
-            private string _name;
-            private Match[] _matches;
-
-            public string Name => _name;
-            public Match[] Matches => _matches;
-            public int TotalScore => _matches.Sum(m => m.Score); // Суммарные очки
-            public int TotalDifference => _matches.Sum(m => m.Difference); // Общая разница голов
-
-            public Team(string name)
-            {
-                _name = name;
-                _matches = new Match[0];
-            }
-
-            public void PlayMatch(int goals, int misses)
-            {
-                Array.Resize(ref _matches, _matches.Length + 1);
-                _matches[-1] = new Match(goals, misses);
-            }
-
             public void Print()
             {
                 Console.WriteLine($"Команда: {_name}, Очки: {TotalScore}, Разница голов: {TotalDifference}");
