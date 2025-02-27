@@ -54,8 +54,37 @@ namespace Lab_6
             //свойства2
             public string Name => _name;
             public Match[] Matches => _matches;
-            public int TotalScore => _matches.Sum(m => m.Score); // Суммарные очки
-            public int TotalDifference => _matches.Sum(m => m.Difference); // Общая разница голов
+            public int TotalScore
+            {
+                get
+                {
+                    if (_matches == null || _matches.Length == 0)
+                        return 0;
+
+                    int total = 0;
+                    foreach (var match in _matches)
+                    {
+                        total += match.Score; //общая сумма очков
+                    }
+                    return total;
+                }
+            }
+
+            public int TotalDifference
+            {
+                get
+                {
+                    if (_matches == null || _matches.Length == 0)
+                        return 0;
+
+                    int total = 0;
+                    foreach (var match in _matches)
+                    {
+                        total += match.Difference;//разница голов
+                    }
+                    return total;
+                }
+            }
 
             //конструкторы2
             public Team(string name)
@@ -67,7 +96,6 @@ namespace Lab_6
             public void PlayMatch(int goals, int misses)
             {
                 if ( _matches==null) return;
-                if (_matches.Length == 0) return;
                 Match newMatch = new Match(goals, misses);
                 Match[] newMatches = new Match[_matches.Length + 1];
                 for (int i = 0; i < _matches.Length; i++)

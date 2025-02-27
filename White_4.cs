@@ -18,7 +18,21 @@ namespace Lab_6
             //свойства
             public string Name => _name;
             public string Surname => _surname;
-            public double[] Scores => _scores;
+            public double[] Scores
+            {
+                get
+                {
+                    if (_scores == null || _scores.Length == 0)
+                        return new double[0];
+
+                    double[] copscores = new double[_scores.Length];//создаем новый массив,копию массива _scores
+                    for (int i = 0; i < _scores.Length; i++)
+                    {
+                        copscores[i] = _scores[i];//передаем ссылку на массив
+                    }
+                    return copscores;
+                }
+            }
             public double TotalScore
             {
                 get
@@ -32,10 +46,10 @@ namespace Lab_6
             }
 
             //конструкторы
-            public Participant(string surname, string name)
+            public Participant(string name, string surname)
             {
-                _surname = surname;
                 _name = name;
+                _surname = surname;
                 _scores = new double[0];
 
 
@@ -49,7 +63,7 @@ namespace Lab_6
             
             public void PlayMatch(double result)
             {
-                if (_scores == null || _scores.Length == 0) return;
+                if (_scores == null) return;
                 double[] newScores = new double[_scores.Length + 1];
                 for (int i = 0; i < _scores.Length; i++)
                 {

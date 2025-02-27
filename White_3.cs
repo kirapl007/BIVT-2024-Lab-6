@@ -51,7 +51,7 @@ namespace Lab_6
                 }
                 else
                 {
-                    if (_marks == null || _marks.Length == 0) return;
+                    if (_marks == null ) return;
                     int[] newMarks = new int[_marks.Length + 1];
                     for (int i = 0; i < _marks.Length; i++)
                     {
