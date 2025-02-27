@@ -23,7 +23,7 @@ namespace Lab_6
                 get
                 {
                     if (_scores == null || _scores.Length == 0)
-                        return new double[0];
+                        return null;
 
                     double[] copscores = new double[_scores.Length];//создаем новый массив,копию массива _scores
                     for (int i = 0; i < _scores.Length; i++)
