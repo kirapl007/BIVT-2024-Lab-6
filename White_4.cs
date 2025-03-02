@@ -37,11 +37,16 @@ namespace Lab_6
             {
                 get
                 {
+                    double s = 0;
                     if (_scores == null || _scores.Length == 0)
                     {
                         return 0;
                     }
-                    return Sum(_scores);
+                    for (int i=0; i < _scores.Length;i++)
+                    {
+                        s += _scores[i];
+                    }
+                    return s;
                 }
             }
 
@@ -96,20 +101,6 @@ namespace Lab_6
                     if (!sw) break; // Если перестановок не было, массив уже отсортирован
                 }
             }
-
-            private  double Sum(double[] array)
-            {
-                double s = 0;
-                if (array.Length == 0) return 0;
-                if (array == null) return 0;
-                for (int i = 0; i < array.Length; i++)
-                {
-                    s += array[i];
-                }
-                return s;
-            }
-
-
         }
         
     }
