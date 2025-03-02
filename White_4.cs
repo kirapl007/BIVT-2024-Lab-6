@@ -22,9 +22,15 @@ namespace Lab_6
             {
                 get
                 {
-                    if (_scores == null || _scores.Length == 0)
+                    if (_scores == null)
                         return null;
-                    return _scores;
+
+                    double[] copscores = new double[_scores.Length];//создаем новый массив,копию массива _scores
+                    for (int i = 0; i < _scores.Length; i++)
+                    {
+                        copscores[i] = _scores[i];//передаем ссылку на массив
+                    }
+                    return copscores;
                 }
             }
             public double TotalScore
